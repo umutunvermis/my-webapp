@@ -63,6 +63,14 @@ namespace Gcris_WebApp.Controllers
 
             return result;
         }
+
+        public async Task<Publication> FindPublicationByTitle(string title)
+        {
+            Publication pub = await _publicationsService.GetByTitleAsync(title);
+            return pub;
+        }
+        
+
     }
 }
     

@@ -15,10 +15,10 @@ namespace Gcris_WebApp.Models
         public string Name { get; set; } = null!;
 
         [BsonElement("ids")]
-        public List<int> Ids { get; set; } = new List<int>()!;
+        public List<int> Ids { get; set; } = null!;
 
         [BsonElement("publications")]
-        public List<string> Publications { get; set; } = new List<string>()!;
+        public List<string> Publications { get; set; } = null!;
 
     }
 }

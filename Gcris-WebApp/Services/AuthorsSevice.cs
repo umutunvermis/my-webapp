@@ -4,11 +4,11 @@ using MongoDB.Driver;
 
 namespace Gcris_WebApp.Services;
 
-public class PublicationsService
+public class AuthorsService
 {
-    private readonly IMongoCollection<Publication> _publicationCollection;
+    private readonly IMongoCollection<Author> _authorCollection;
 
-    public PublicationsService(
+    public AuthorsService(
         IOptions<GcrisDatabaseSettings> gcrisDatabaseSettings)
     {
         var mongoClient = new MongoClient(
@@ -17,22 +17,22 @@ public class PublicationsService
         var mongoDatabase = mongoClient.GetDatabase(
             gcrisDatabaseSettings.Value.DatabaseName);
 
-        _publicationCollection = mongoDatabase.GetCollection<Publication>(
-            gcrisDatabaseSettings.Value.PublicationsCollectionName);
+        _authorCollection = mongoDatabase.GetCollection<Author>(
+            gcrisDatabaseSettings.Value.AuthorsCollectionName);
     }
 
-    public async Task<List<Publication>> GetAsync() =>
-        await _publicationCollection.Find(_ => true).ToListAsync();
+    public async Task<List<Author>> GetAsync() =>
+        await _authorCollection.Find(_ => true).ToListAsync();
 
-    public async Task<Publication?> GetAsync(string id) =>
-        await _publicationCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
+    public async Task<Author?> GetAsync(string id) =>
+        await _authorCollection.Find(x => x.Id == id).FirstOrDefaultAsync();
 
-    public async Task CreateAsync(Publication newPubllication) =>
-        await _publicationCollection.InsertOneAsync(newPubllication);
+    public async Task CreateAsync(Author newPubllication) =>
+        await _authorCollection.InsertOneAsync(newPubllication);
 
-    public async Task UpdateAsync(string id, Publication updatedPubllication) =>
-        await _publicationCollection.ReplaceOneAsync(x => x.Id == id, updatedPubllication);
+    public async Task UpdateAsync(string id, Author updatedPubllication) =>
+        await _authorCollection.ReplaceOneAsync(x => x.Id == id, updatedPubllication);
 
     public async Task RemoveAsync(string id) =>
-        await _publicationCollection.DeleteOneAsync(x => x.Id == id);
+        await _authorCollection.DeleteOneAsync(x => x.Id == id);
 }

@@ -2,7 +2,8 @@
 // for details on configuring this project to bundle and minify static web assets.
 
 // Write your JavaScript code.
-    // Fill the publications table
+// Fill the publications table
+
 var authors;
 var selectedAuthor = null;
 var pageNumber;
@@ -22,7 +23,7 @@ function fillTable(result) {
     pager = ""
     if (result.pageCount == result.pageNumber) {
         $("#btn-next").css("display", "none");
-        currentDisplay = 12 * (result.pageNumber - 1) + " - " + result.resultCount * 12 + " displayed";
+        currentDisplay = 12 * (result.pageNumber - 1) + " - " + result.resultCount + " displayed";
     }
     else {
         $("#btn-next").css("display", "block");
@@ -35,6 +36,26 @@ function fillTable(result) {
     }
     $("#total-result").html(totalResults);
     $("#current-result").html(currentDisplay);
+
+    addRowHandlers()
+}
+
+function addRowHandlers() {
+    var table = document.getElementById("result-table");
+    var rows = table.getElementsByTagName("tr");
+    for (i = 0; i < rows.length; i++) {
+        var currentRow = table.rows[i];
+        var createClickHandler =
+            function (row) {
+                return function () {
+                    var cell = row.getElementsByTagName("td")[0];
+                    var title = cell.innerHTML;
+                    loadPublicationResult(title);
+                };
+            };
+
+        currentRow.onclick = createClickHandler(currentRow);
+    }
 }
 
 function loadTable(page) {
@@ -73,11 +94,11 @@ function loadAuthors() {
                 var string = "<option data-value=" + '"[' + author.name + ']"' + ' value="' + author.name + '"></option>'
                 $("#authors-dropdown").append(string);
             }
-                
         });
 }
 
 $(document).ready(function () {
+    $("#publication-result").html("");
     console.log("ready!");
     pageNumber = 1;
     loadAuthors();
@@ -85,15 +106,16 @@ $(document).ready(function () {
     loadTable(pageNumber);
 
     $('#search-author').click(function () {
+        pageNumber = 1;
         var value = $('#selected').val();
         selectedAuthor = value;
-        var ids = ($('#authors-dropdown [value="' + value + '"]').data('value'));
+        //var ids = ($('#authors-dropdown [value="' + value + '"]').data('value'));
         for (auth of authors) {
             if (auth.name == selectedAuthor) {
                 loadTableForAuthor(auth.publications, pageNumber);
+                break;
             }
         }
-        console.log(ids)
     });
 
     $("#btn-next").click(function () {
@@ -101,17 +123,27 @@ $(document).ready(function () {
         if (selectedAuthor == null) {
             loadTable(pageNumber);
         } else {
-            $('#search-author').click();
+            for (auth of authors) {
+                if (auth.name == selectedAuthor) {
+                    loadTableForAuthor(auth.publications, pageNumber);
+                    break;
+                }
+            }
         }
     });
+
     $("#btn-previous").click(function () {
         pageNumber -= 1;
         if (selectedAuthor == null) {
             loadTable(pageNumber);
         } else {
-            $('#search-author').click();
+            for (auth of authors) {
+                if (auth.name == selectedAuthor) {
+                    loadTableForAuthor(auth.publications, pageNumber);
+                    break;
+                }
+            }
         }
     });
-
     
 });
