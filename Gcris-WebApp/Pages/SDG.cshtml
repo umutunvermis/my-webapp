@@ -1,0 +1,111 @@
+﻿@page
+@model IndexModel
+@{
+    ViewData["Title"] = "Sustainability Goals";
+}
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <h1 class ="display-6">Search an Author</h1>
+    <div>
+        <datalist id="authors-dropdown">
+        </datalist>
+        <input id="selected" autoComplete="on" list="authors-dropdown"/> 
+        <button id="search-author" type="submit">Search</button>
+    </div>
+</div>
+<br />
+<div id="result-body" display="flex">
+    <div id="publication-table" align="center">
+        <div id="table-data" class="text-center">
+            <p id="total-result"></p>
+            <p id="current-result"></p>
+        </div>
+        <style type="text/css">
+            .tg {
+                border-collapse: collapse;
+                border-color: #9ABAD9;
+                border-spacing: 0;
+            }
+
+                .tg td {
+                    background-color: #EBF5FF;
+                    border-color: #9ABAD9;
+                    border-style: solid;
+                    border-width: 1px;
+                    color: #444;
+                    font-family: Arial, sans-serif;
+                    font-size: 14px;
+                    overflow: hidden;
+                    padding: 10px 5px;  
+                    word-break: normal;
+                }
+
+                .tg th {
+                    background-color: #409cff;
+                    border-color: #9ABAD9;
+                    border-style: solid;
+                    border-width: 1px;
+                    color: #fff;
+                    font-family: Arial, sans-serif;
+                    font-size: 14px;
+                    font-weight: normal;
+                    overflow: hidden;
+                    padding: 10px 5px;
+                    word-break: normal;
+                }
+
+                .tg .tg-hmp3 {
+                    background-color: #D2E4FC;
+                    text-align: left;
+                    vertical-align: top
+                }
+
+                .tg .tg-0lax {
+                    text-align: left;
+                    vertical-align: top
+                }
+        </style>
+        <table id="result-table" class="tg" align="center">
+            <thead>
+                <tr>
+                    <th class="tg-0lax">Title</th>
+                    <th class="tg-0lax">Year</th>
+                </tr>
+            </thead>
+            <tbody id="table-body">
+            </tbody>
+        </table>
+        <br />
+        <div id="buttons">
+            <style type="text/css">
+                .buttons {
+                    width: 200px;
+                    margin: 0 auto;
+                    display: inline;
+                }
+
+                .action-btn {
+                    width: 200px;
+                    margin: 0 auto;
+                    display: inline;
+                }
+            </style>
+            <button id="btn-previous" class="action-btn">Previous</button>
+            <button id="btn-next" class="action-btn">Next</button>
+        </div>
+    </div>
+</div>
+<br />
+<br />
+<br />
+<div id="publication-result">
+    <h6 id="abstract"></h6>
+    <h6 id="authors"></h6>
+    <h6 id="year"></h6>
+</div>
+
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/Index/Index.js"></script>
+<script src="~/js/Index/PublicationResult.js"></script>
