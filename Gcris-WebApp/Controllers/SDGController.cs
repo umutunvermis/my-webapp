@@ -7,20 +7,18 @@ namespace Gcris_WebApp.Controllers
 {
     public class SDGController : Controller
     {
-        private readonly PublicationsService _publicationsService;
-        private readonly AuthorsService _authorsService;
+        private readonly SdgPublicationsService _sdgPublicationsService;
 
-        public SDGController(PublicationsService publicationsService, AuthorsService authorsService)
+        public SDGController(SdgPublicationsService sdgPublicationsService, AuthorsService authorsService)
         {
-            _publicationsService = publicationsService;
-            _authorsService = authorsService;
+            _sdgPublicationsService = sdgPublicationsService;
         }
 
         [HttpPost]
-        public async Task<FindPublicationsResult> FindPublicationsAsync(int page)
+        public async Task<FindSdgPublicationsResult> FindPublicationsAsync(int page)
         {
-            List<Publication> pubs = await _publicationsService.GetAsync();
-            List<Publication> publications = new List<Publication>();
+            List<SdgPublication> pubs = await _sdgPublicationsService.GetAsync();
+            List<SdgPublication> publications = new List<SdgPublication>();
             int resultCount = pubs.Count;
             int pageCount = ((pubs.Count - 1) / 12) + 1;
             int pageNumber = page;
@@ -29,44 +27,15 @@ namespace Gcris_WebApp.Controllers
                 if (pubs.Count > i)
                     publications.Add(pubs[i]);
             }
-            FindPublicationsResult result = new FindPublicationsResult(pageCount, pageNumber, resultCount, publications);
+            FindSdgPublicationsResult result = new FindSdgPublicationsResult(pageCount, pageNumber, resultCount, publications);
             
             return result;
         }
 
-        [HttpGet]
-        public async Task<List<Author>> LoadAuthors()
-        {
-            List<Author> authors = await _authorsService.GetAsync();
-            return authors;
-        }
 
-        [HttpPost]
-        public async Task<FindPublicationsResult> LoadTableForAuthor(List<string> ids, int page)
+        public async Task<SdgPublication> FindPublicationByTitle(string title)
         {
-            List<Publication> pubs = new List<Publication>();
-            List<Publication> publications = new List<Publication>();
-            foreach (string id in ids)
-            {
-                Publication pub = await _publicationsService.GetAsync(id);
-                pubs.Add(pub);
-            }
-            int resultCount = pubs.Count;
-            int pageCount = ((pubs.Count - 1) / 12) + 1;
-            int pageNumber = page;
-            for (int i = (page - 1) * 12; i < 12 * page; i++)
-            {
-                if (pubs.Count > i)
-                    publications.Add(pubs[i]);
-            }
-            FindPublicationsResult result = new FindPublicationsResult(pageCount, pageNumber, resultCount, publications);
-
-            return result;
-        }
-
-        public async Task<Publication> FindPublicationByTitle(string title)
-        {
-            Publication pub = await _publicationsService.GetByTitleAsync(title);
+            SdgPublication pub = await _sdgPublicationsService.GetByTitleAsync(title);
             return pub;
         }
         

@@ -1,10 +1,10 @@
 ﻿
 namespace Gcris_WebApp.Models
 {
-    public class FindSdgPublicationsResult
+    public class FindPublicationsResult 
     {
 
-        public FindSdgPublicationsResult(int PageCount, int PageNumber, int ResultCount, List<SdgPublication>? Publications)
+        public FindPublicationsResult(int PageCount, int PageNumber, int ResultCount, List<Publication>? Publications)
         {
             this.PageNumber = PageNumber;
             this.PageCount = PageCount;
@@ -12,7 +12,7 @@ namespace Gcris_WebApp.Models
             this.ResultCount = ResultCount;
         }
 
-        public List<SdgPublication>? Publications { get; set; }
+        public List<Publication>? Publications { get; set; }
 
         public int PageCount { get; set; } = 0;
 

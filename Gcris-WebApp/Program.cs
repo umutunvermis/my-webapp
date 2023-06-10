@@ -7,6 +7,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.Configure<GcrisDatabaseSettings>(  
     builder.Configuration.GetSection("gcrisDatabase"));
 
+builder.Services.AddSingleton<SdgPublicationsService>();
 builder.Services.AddSingleton<PublicationsService>();
 builder.Services.AddSingleton<AuthorsService>();
 

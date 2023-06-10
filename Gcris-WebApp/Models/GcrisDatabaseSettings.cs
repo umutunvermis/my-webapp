@@ -10,4 +10,5 @@ public class GcrisDatabaseSettings
 
     public string PublicationsCollectionName { get; set; } = null!;
 
+    public string SdgPublicationsCollectionName { get; set; } = null!;
 }
