@@ -7,15 +7,14 @@
 var authors;
 var selectedAuthor = null;
 var pageNumber;
+var publications;
 
 function fillTable(result) {
     $("#table-body").html("");
     rows = "";
     for (pub of result.publications) {
         pubTitle = pub.title;
-        pubYear = pub.year;
         rows += '<tr><td class="tg-hmp3">' + pubTitle + "</td >";
-        rows += '<td class="tg-hmp3">' + pubYear + '</td ></tr >';
     }
     $("#table-body").html(rows);
     var totalResults = result.resultCount + " total results";
@@ -50,7 +49,7 @@ function addRowHandlers() {
                 return function () {
                     var cell = row.getElementsByTagName("td")[0];
                     var title = cell.innerHTML;
-                    loadPublicationResult(title);
+                    loadPublicationResult(title, publications);
                 };
             };
 
@@ -65,6 +64,7 @@ function loadTable(page) {
         data: { page: page}
     })
         .done(function (result) {
+            publications = result;
             fillTable(result)
         });
 }
@@ -118,3 +118,4 @@ $(document).ready(function () {
     });
     
 });
+
