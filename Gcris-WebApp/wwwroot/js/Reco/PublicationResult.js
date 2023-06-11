@@ -31,7 +31,7 @@ function buildPublicationResultDiv(publication, index) {
         $("#publication-result-" + String(index)).append(author);
     }
 
-    $("#graph").html('<img src="https://img001.prntscr.com/file/img001/-X3ml_ugTyWtIVy8JqNnqQ.png" alt="Italian Trulli">');
+    $("#graph").html('<img src="https://img001.prntscr.com/file/img001/AItQ8vEZTuW2ohR__YvGaQ.png" alt="Italian Trulli">');
     console.log(publication);
     /*
     $("#title").html(publication.title);
