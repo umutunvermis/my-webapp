@@ -63,9 +63,9 @@ function buildPublicationResultDiv(publication) {
         var author = '<h5 class="author" class="display-8">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp' + author.name + '</h5>';
         $("#publication-result").append(author);
     }
+    */
     $("html, body").animate({ scrollTop: $(document).height() - $(window).height() });
     console.log(publication);
-    */
     /*
     $("#title").html(publication.title);
     $("#abstract").html(publication.paperAbstract);
