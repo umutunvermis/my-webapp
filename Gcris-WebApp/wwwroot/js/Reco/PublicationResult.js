@@ -30,7 +30,8 @@ function buildPublicationResultDiv(publication, index) {
         var author = '<h5 class="author" class="display-8">&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp' + author.name + '</h5>';
         $("#publication-result-" + String(index)).append(author);
     }
-    $("html, body").animate({ scrollTop: $(document).height() - $(window).height() });
+
+    $("#graph").html('<img src="https://img001.prntscr.com/file/img001/-X3ml_ugTyWtIVy8JqNnqQ.png" alt="Italian Trulli">');
     console.log(publication);
     /*
     $("#title").html(publication.title);
